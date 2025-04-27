@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Иван Иванов - Аналитик и веб-разработчик</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-blue: #00f2ff;
+            --neon-purple: #b300ff;
+            --dark-bg: linear-gradient(135deg, #0a0a2a 0%, #1a1a3a 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--dark-bg);
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .banner-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .banner {
+            position: relative;
+            padding: 60px 40px;
+            border-radius: 20px;
+            background: rgba(10, 10, 42, 0.7);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.2);
+            overflow: hidden;
+            margin-bottom: 60px;
+        }
+        
+        .banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 242, 255, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+            z-index: -1;
+        }
+        
+        .banner::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 20px;
+            padding: 2px;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, #fff, var(--neon-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 10px rgba(0, 242, 255, 0.3);
+            letter-spacing: 1px;
+        }
+        
+        .title {
+            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+            margin-bottom: 30px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .title span {
+            display: inline-block;
+            position: relative;
+        }
+        
+        .title span::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--neon-blue);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+        }
+        
+        .title span:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+        
+        .language-switcher {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+        
+        .language-btn {
+            background: transparent;
+            border: 1px solid rgba(0, 242, 255, 0.3);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .language-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 242, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .language-btn:hover {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
+        }
+        
+        .language-btn:hover::before {
+            left: 100%;
+        }
+        
+        .language-btn.active {
+            background: rgba(0, 242, 255, 0.2);
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 10px rgba(0, 242, 255, 0.5);
+        }
+        
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(1.8rem, 3vw, 2.5rem);
+            margin-bottom: 50px;
+            background: linear-gradient(90deg, #fff, var(--neon-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 10px rgba(0, 242, 255, 0.3);
+            letter-spacing: 1px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--neon-blue), transparent);
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .project-card {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            background: rgba(10, 10, 42, 0.5);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(0, 242, 255, 0.1);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 242, 255, 0.2);
+            border-color: rgba(0, 242, 255, 0.3);
+        }
+        
+        .project-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 15px;
+            padding: 1px;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .project-card:hover::before {
+            opacity: 1;
+        }
+        
+        .project-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid rgba(0, 242, 255, 0.1);
+        }
+        
+        .project-content {
+            padding: 25px;
+        }
+        
+        .project-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: white;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .project-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--neon-blue);
+            transition: width 0.3s ease;
+        }
+        
+        .project-card:hover .project-title::after {
+            width: 100%;
+        }
+        
+        .project-description {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+        
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .project-tag {
+            background: rgba(0, 242, 255, 0.1);
+            color: var(--neon-blue);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border: 1px solid rgba(0, 242, 255, 0.2);
+        }
+        
+        .grid-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 242, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 242, 255, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -1;
+        }
+        
+        .floating-elements {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .floating-element {
+            position: absolute;
+            background: rgba(0, 242, 255, 0.1);
+            border-radius: 50%;
+            filter: blur(20px);
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0);
+            }
+            50% {
+                transform: translate(20px, 20px);
+            }
+        }
+        
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .banner-container {
+                padding: 20px;
+            }
+            
+            .banner {
+                padding: 40px 20px;
+                margin-bottom: 40px;
+            }
+            
+            .language-switcher {
+                flex-wrap: wrap;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .timeline {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent, var(--neon-blue), transparent);
+    transform: translateX(-50%);
+}
+
+.timeline-section {
+    margin-bottom: 50px;
+}
+
+.timeline-title {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--neon-blue);
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 1.5rem;
+    text-shadow: 0 0 10px rgba(0, 242, 255, 0.3);
+}
+
+.timeline-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.timeline-period {
+    width: 45%;
+    padding: 15px;
+    text-align: right;
+    color: var(--neon-blue);
+    font-weight: 600;
+}
+
+.timeline-content {
+    width: 45%;
+    padding: 20px;
+    background: rgba(10, 10, 42, 0.5);
+    border-radius: 10px;
+    border: 1px solid rgba(0, 242, 255, 0.1);
+    box-shadow: 0 0 15px rgba(0, 242, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.timeline-item:nth-child(even) .timeline-period {
+    order: 2;
+    text-align: left;
+}
+
+.timeline-item:nth-child(even) .timeline-content {
+    order: 1;
+}
+
+.timeline-content:hover {
+    border-color: rgba(0, 242, 255, 0.3);
+    box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
+    transform: translateY(-5px);
+}
+
+.timeline-heading {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+    color: white;
+}
+
+.timeline-subheading {
+    color: var(--neon-blue);
+    font-weight: 600;
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+}
+
+.timeline-description {
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.6;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    .timeline::before {
+        left: 20px;
+    }
+    
+    .timeline-item {
+        flex-direction: column;
+    }
+    
+    .timeline-period,
+    .timeline-content {
+        width: 100%;
+        text-align: left !important;
+    }
+    
+    .timeline-period {
+        padding-left: 40px;
+        margin-bottom: 10px;
+    }
+    
+    .timeline-item:nth-child(even) .timeline-period,
+    .timeline-item:nth-child(even) .timeline-content {
+        order: 0;
+    }
+}
+footer {
+    background: rgba(10, 10, 42, 0.9);
+    padding: 60px 0 30px;
+    border-top: 1px solid rgba(0, 242, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(5px);
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(0, 242, 255, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(179, 0, 255, 0.05) 0%, transparent 50%);
+    z-index: -1;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Сетка для фоновых элементов */
+.footer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(rgba(0, 242, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 242, 255, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    z-index: -1;
+}
+
+/* Общие стили для кнопок */
+.neon-btn {
+    padding: 12px 30px;
+    border-radius: 30px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    border: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+}
+
+.neon-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: 0.5s;
+}
+
+.neon-btn:hover::before {
+    left: 100%;
+}
+
+.neon-blue {
+    background: rgba(0, 242, 255, 0.1);
+    color: #00f2ff;
+    border: 1px solid #00f2ff;
+    box-shadow: 0 0 10px rgba(0, 242, 255, 0.2);
+}
+
+.neon-blue:hover {
+    background: rgba(0, 242, 255, 0.2);
+    box-shadow: 0 0 20px rgba(0, 242, 255, 0.4);
+}
+
+.neon-purple {
+    background: rgba(179, 0, 255, 0.1);
+    color: #b300ff;
+    border: 1px solid #b300ff;
+    box-shadow: 0 0 10px rgba(179, 0, 255, 0.2);
+}
+
+.neon-purple:hover {
+    background: rgba(179, 0, 255, 0.2);
+    box-shadow: 0 0 20px rgba(179, 0, 255, 0.4);
+}
+
+.contact-buttons {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Социальные иконки */
+.social-links {
+    display: flex;
+    gap: 25px;
+}
+
+.social-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid;
+}
+
+.social-icon::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: 0.5s;
+}
+
+.social-icon:hover::before {
+    left: 100%;
+}
+
+.neon-cyan {
+    color: #00f2ff;
+    border-color: #00f2ff;
+    background: rgba(0, 242, 255, 0.1);
+    box-shadow: 0 0 10px rgba(0, 242, 255, 0.2);
+}
+
+.neon-cyan:hover {
+    background: rgba(0, 242, 255, 0.2);
+    box-shadow: 0 0 20px rgba(0, 242, 255, 0.4);
+    transform: translateY(-3px);
+}
+
+.neon-orange {
+    color: #ff6600;
+    border-color: #ff6600;
+    background: rgba(255, 102, 0, 0.1);
+    box-shadow: 0 0 10px rgba(255, 102, 0, 0.2);
+}
+
+.neon-orange:hover {
+    background: rgba(255, 102, 0, 0.2);
+    box-shadow: 0 0 20px rgba(255, 102, 0, 0.4);
+    transform: translateY(-3px);
+}
+
+/* Ссылки на резюме */
+.resume-section {
+    text-align: center;
+}
+
+.resume-title {
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 15px;
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+
+.resume-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.lang-btn {
+    padding: 8px 20px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+    text-decoration: none;
+    font-size: 0.9rem;
+    border: 1px solid rgba(0, 242, 255, 0.3);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.lang-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 242, 255, 0.2), transparent);
+    transition: 0.5s;
+}
+
+.lang-btn:hover::before {
+    left: 100%;
+}
+
+.lang-btn:hover {
+    background: rgba(0, 242, 255, 0.1);
+    border-color: var(--neon-blue);
+    box-shadow: 0 0 10px rgba(0, 242, 255, 0.3);
+}
+
+.lang-btn.active {
+    background: rgba(0, 242, 255, 0.2);
+    border-color: var(--neon-blue);
+    box-shadow: 0 0 10px rgba(0, 242, 255, 0.3);
+}
+
+/* Копирайт */
+.copyright {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.8rem;
+    margin-top: 50px;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+@media (max-width: 768px) {
+    .footer {
+        padding: 40px 0 20px;
+    }
+    
+    .footer-content {
+        gap: 30px;
+    }
+    
+    .contact-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .neon-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .social-links {
+        gap: 15px;
+    }
+    
+    .social-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+    }
+    
+    .resume-buttons {
+        gap: 10px;
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="grid-pattern"></div>
+    <div class="floating-elements">
+        <div class="floating-element" style="width: 200px; height: 200px; top: -50px; left: -50px; animation: float 8s infinite;"></div>
+        <div class="floating-element" style="width: 300px; height: 300px; bottom: -100px; right: -100px; animation: float 12s infinite 2s;"></div>
+    </div>
+    
+    <div class="banner-container">
+        <div class="banner">
+            <h1 class="name">Гребенюков Сергей</h1>
+            <p class="title">
+                <span>Аналитик данных</span> и <span>фриланс веб-разработчик</span>
+            </p>
+            
+            <div class="language-switcher">
+                <button class="language-btn active">Русский</button>
+                <button class="language-btn">English</button>
+                <button class="language-btn">Deutsch</button>
+            </div>
+        </div>
+        
+        <h2 class="section-title">Проекты по аналитике</h2>
+        
+        <div class="projects-grid">
+            <!-- Проект 1 -->
+            <div class="project-card">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Дашборд аналитики" class="project-image">
+                <div class="project-content">
+                    <h3 class="project-title">Анализ продаж ритейла</h3>
+                    <p class="project-description">
+                        Разработал комплексную систему анализа продаж для сети магазинов. 
+                        Внедрил автоматизированные отчеты и дашборды в Power BI, 
+                        что позволило сократить время на анализ данных на 40%.
+                    </p>
+                    <div class="project-tags">
+                        <span class="project-tag">Power BI</span>
+                        <span class="project-tag">SQL</span>
+                        <span class="project-tag">Python</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Проект 2 -->
+            <div class="project-card">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Финансовая аналитика" class="project-image">
+                <div class="project-content">
+                    <h3 class="project-title">Прогнозирование финансовых показателей</h3>
+                    <p class="project-description">
+                        Создал модель прогнозирования ключевых финансовых показателей 
+                        для банковского сектора. Точность прогноза составила 92% 
+                        на тестовых данных.
+                    </p>
+                    <div class="project-tags">
+                        <span class="project-tag">Machine Learning</span>
+                        <span class="project-tag">Python</span>
+                        <span class="project-tag">Tableau</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Проект 3 -->
+            <div class="project-card">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Web Analytics" class="project-image">
+                <div class="project-content">
+                    <h3 class="project-title">Оптимизация маркетинговых кампаний</h3>
+                    <p class="project-description">
+                        Провел анализ эффективности маркетинговых каналов для e-commerce проекта. 
+                        Выявил наиболее ROI-эффективные каналы, что позволило сократить 
+                        маркетинговый бюджет на 25% без потери объема продаж.
+                    </p>
+                    <div class="project-tags">
+                        <span class="project-tag">Google Analytics</span>
+                        <span class="project-tag">Excel</span>
+                        <span class="project-tag">Data Studio</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Проект 4 -->
+            <div class="project-card">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="HR Analytics" class="project-image">
+                <div class="project-content">
+                    <h3 class="project-title">HR-аналитика для IT-компании</h3>
+                    <p class="project-description">
+                        Разработал систему анализа текучести кадров и эффективности 
+                        рекрутинга. Внедренные рекомендации снизили текучесть 
+                        персонала на 15% за полгода.
+                    </p>
+                    <div class="project-tags">
+                        <span class="project-tag">Excel</span>
+                        <span class="project-tag">Power BI</span>
+                        <span class="project-tag">HR Metrics</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Проект 5 -->
+            <div class="project-card">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Supply Chain Analytics" class="project-image">
+                <div class="project-content">
+                    <h3 class="project-title">Анализ цепочки поставок</h3>
+                    <p class="project-description">
+                        Оптимизировал логистические маршруты для производственной компании, 
+                        что сократило затраты на транспортировку на 18% и уменьшило 
+                        время доставки на 22%.
+                    </p>
+                    <div class="project-tags">
+                        <span class="project-tag">SQL</span>
+                        <span class="project-tag">Python</span>
+                        <span class="project-tag">Оптимизация</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Проект 6 -->
+            <div class="project-card">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Customer Analytics" class="project-image">
+                <div class="project-content">
+                    <h3 class="project-title">Сегментация клиентской базы</h3>
+                    <p class="project-description">
+                        Провел RFM-анализ и кластеризацию клиентов для сети ресторанов. 
+                        Разработал персонализированные маркетинговые стратегии 
+                        для каждого сегмента, что увеличило средний чек на 12%.
+                    </p>
+                    <div class="project-tags">
+                        <span class="project-tag">RFM-анализ</span>
+                        <span class="project-tag">Кластеризация</span>
+                        <span class="project-tag">Tableau</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+
+            <h2 class="section-title">Проекты по веб-разработке</h2>
+            
+            <div class="projects-grid">
+                <!-- Проект 1 -->
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Корпоративный сайт" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Корпоративный сайт для FinTech</h3>
+                        <p class="project-description">
+                            Полноценный сайт с административной панелью, интеграцией платежей 
+                            и анимированными графиками. Реализовано на React + Node.js.
+                        </p>
+                        <div class="project-tags">
+                            <span class="project-tag">React</span>
+                            <span class="project-tag">Node.js</span>
+                            <span class="project-tag">MongoDB</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Проект 2 -->
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1547658719-da2b51169166?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Интернет-магазин" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Интернет-магазин электроники</h3>
+                        <p class="project-description">
+                            Производительный магазин с каталогом 10k+ товаров, фильтрами 
+                            и быстрым поиском. Оптимизированная загрузка страниц <1с.
+                        </p>
+                        <div class="project-tags">
+                            <span class="project-tag">Vue.js</span>
+                            <span class="project-tag">Laravel</span>
+                            <span class="project-tag">Redis</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Проект 3 -->
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Лендинг" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Продающий лендинг для стартапа</h3>
+                        <p class="project-description">
+                            Высококонверсионный лендинг с A/B тестированием элементов. 
+                            Конверсия увеличена с 3% до 8% после оптимизации.
+                        </p>
+                        <div class="project-tags">
+                            <span class="project-tag">HTML/CSS</span>
+                            <span class="project-tag">GSAP</span>
+                            <span class="project-tag">Google Optimize</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Проект 4 -->
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="CRM система" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Кастомизированная CRM система</h3>
+                        <p class="project-description">
+                            Адаптация open-source CRM под нужды клиента с дополнительными 
+                            модулями аналитики и интеграцией с 1С.
+                        </p>
+                        <div class="project-tags">
+                            <span class="project-tag">PHP</span>
+                            <span class="project-tag">MySQL</span>
+                            <span class="project-tag">API</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Проект 5 -->
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Мобильное приложение" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Мобильное приложение + веб-админка</h3>
+                        <p class="project-description">
+                            Кроссплатформенное приложение на React Native с синхронизацией 
+                            данных в реальном времени через веб-интерфейс.
+                        </p>
+                        <div class="project-tags">
+                            <span class="project-tag">React Native</span>
+                            <span class="project-tag">Firebase</span>
+                            <span class="project-tag">Redux</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Проект 6 -->
+                <div class="project-card">
+                    <img src="https://images.unsplash.com/photo-1555774698-0b77e0d5fac6?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Веб-приложение" class="project-image">
+                    <div class="project-content">
+                        <h3 class="project-title">Веб-приложение для управления проектами</h3>
+                        <p class="project-description">
+                            Интерактивная доска задач с drag-and-drop, уведомлениями 
+                            и экспортом отчетов. Полная PWA-реализация.
+                        </p>
+                        <div class="project-tags">
+                            <span class="project-tag">Angular</span>
+                            <span class="project-tag">NestJS</span>
+                            <span class="project-tag">PWA</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <h2 class="section-title">Образование и опыт</h2>
+            
+            <div class="timeline">
+                <!-- Образование -->
+                <div class="timeline-section">
+                    <h3 class="timeline-title"><i class="fas fa-graduation-cap"></i> Образование</h3>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-period">2015 - 2019</div>
+                        <div class="timeline-content">
+                            <h4 class="timeline-heading">Национальный Исследовательский Университет</h4>
+                            <p class="timeline-subheading">Магистр прикладной математики и информатики</p>
+                            <p class="timeline-description">
+                                Специализация: Анализ больших данных. Дипломная работа: "Прогнозирование временных рядов 
+                                с использованием нейронных сетей". Средний балл: 4.8.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-period">2020 - 2021</div>
+                        <div class="timeline-content">
+                            <h4 class="timeline-heading">GeekBrains</h4>
+                            <p class="timeline-subheading">Факультет веб-разработки</p>
+                            <p class="timeline-description">
+                                Полный курс по современной веб-разработке: JavaScript, React, Node.js, базы данных. 
+                                Завершил 5 проектов, включая интернет-магазин и SPA-приложение.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Опыт работы -->
+                <div class="timeline-section">
+                    <h3 class="timeline-title"><i class="fas fa-briefcase"></i> Опыт работы</h3>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-period">2019 - 2021</div>
+                        <div class="timeline-content">
+                            <h4 class="timeline-heading">DataArt</h4>
+                            <p class="timeline-subheading">Аналитик данных</p>
+                            <p class="timeline-description">
+                                - Разрабатывал ETL-процессы для обработки данных<br>
+                                - Создавал интерактивные дашборды в Tableau/Power BI<br>
+                                - Автоматизировал отчетность (Python + SQL)<br>
+                                - Оптимизировал запросы, сократив время выполнения на 40%
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-period">2021 - 2022</div>
+                        <div class="timeline-content">
+                            <h4 class="timeline-heading">Freelance</h4>
+                            <p class="timeline-subheading">Веб-разработчик</p>
+                            <p class="timeline-description">
+                                - Разработал 12+ сайтов и веб-приложений<br>
+                                - Стек: JavaScript, React, Node.js, MongoDB<br>
+                                - Интеграции с платежными системами и API<br>
+                                - Оптимизация производительности (Lighthouse score >90)
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-period">2022 - н.в.</div>
+                        <div class="timeline-content">
+                            <h4 class="timeline-heading">TechSolutions Inc.</h4>
+                            <p class="timeline-subheading">Senior Fullstack Developer</p>
+                            <p class="timeline-description">
+                                - Руководство командой из 3 разработчиков<br>
+                                - Архитектура микросервисных приложений<br>
+                                - Внедрение CI/CD процессов<br>
+                                - Разработка сложных SPA с реальным временем данных
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <!-- Контактные кнопки -->
+                <div class="contact-buttons">
+                    <a href="tel:+79991234567" class="neon-btn neon-blue">
+                        <i class="fas fa-phone-alt"></i> Позвонить
+                    </a>
+                    <a href="mailto:ivan@example.com" class="neon-btn neon-purple">
+                        <i class="fas fa-envelope"></i> Написать
+                    </a>
+                </div>
+                
+                <!-- Социальные сети -->
+                <div class="social-links">
+                    <a href="https://t.me/ivan_ivanov" target="_blank" class="social-icon neon-telegram">
+                        <i class="fab fa-telegram-plane"></i>
+                    </a>
+                    <a href="https://hh.ru/resume/12345" target="_blank" class="social-icon neon-hh">
+                        <i class="fab fa-headhunter"></i>
+                    </a>
+                    <a href="https://vk.com/ivan_ivanov" target="_blank" class="social-icon neon-vk">
+                        <i class="fab fa-vk"></i>
+                    </a>
+                </div>
+                
+                <!-- Ссылки на резюме -->
+                <div class="resume-section">
+                    <h4 class="resume-title neon-text">Резюме:</h4>
+                    <div class="resume-buttons">
+                        <a href="/resume_ru.pdf" class="resume-btn">Русский</a>
+                        <a href="/resume_en.pdf" class="resume-btn">English</a>
+                        <a href="/resume_de.pdf" class="resume-btn">Deutsch</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Копирайт -->
+            <div class="copyright">
+                <p>© 2023 Иван Иванов. Все права защищены.</p>
+            </div>
+        </div>
+        
+        <!-- Фоновые элементы -->
+        <div class="footer-elements">
+            <div class="footer-element"></div>
+            <div class="footer-element"></div>
+        </div>
+    </footer>
+    
+
+    <script>
+        // Language switcher functionality
+        const languageBtns = document.querySelectorAll('.language-btn');
+        
+        languageBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                languageBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                // Here you would typically change the language content
+                // For demo purposes we just change the active button
+            });
+        });
+        
+        // Create additional floating elements
+        const floatingContainer = document.querySelector('.floating-elements');
+        
+        for (let i = 0; i < 5; i++) {
+            const size = Math.random() * 100 + 50;
+            const x = Math.random() * 100;
+            const y = Math.random() * 100;
+            const duration = Math.random() * 10 + 5;
+            const delay = Math.random() * 5;
+            
+            const element = document.createElement('div');
+            element.className = 'floating-element';
+            element.style.width = `${size}px`;
+            element.style.height = `${size}px`;
+            element.style.left = `${x}%`;
+            element.style.top = `${y}%`;
+            element.style.animation = `float ${duration}s infinite ${delay}s`;
+            
+            floatingContainer.appendChild(element);
+        }
+    </script>
+</body>
+</html>
